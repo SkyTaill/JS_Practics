@@ -1,25 +1,21 @@
+
 function useRequest(url, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
 
-    xhr.onload = function () {
-        if (xhr.status != 200) {
-            console.log('Статус ответа: ', xhr.status);
-        } else {
-            const result = JSON.parse(xhr.response);
-            console.log(result);
-            console.log(url);
+    fetch(url)
+        .then((response) => {
+            //  console.log('response', response);
+            const result = response.json();
+            // console.log('result', result);
+            return result;
+        })
+        .then((data) => {
+            // Объект результата в формате JSON
+            console.log(data);
             if (callback) {
-                callback(result);
+                callback(data);
             }
-        }
-    };
-
-    xhr.onerror = function () {
-        console.log('Ошибка! Статус ответа: ', xhr.status);
-    };
-
-    xhr.send();
+        })
+        .catch(() => { console.log('error') });
 };
 
 function displayResult(apiData) {
@@ -34,14 +30,12 @@ function displayResult(apiData) {
         </div>
       `;
 
-    // console.log('end cards', cards);
-
     div.innerHTML = cardBlock;
 }
 
 
 function click1() {
-    //div.innerHTML = form.value;
+
     if (form.value >= 100 && form.value <= 500 && form2.value >= 100 && form2.value <= 500) {
         alert(form.value);
 
