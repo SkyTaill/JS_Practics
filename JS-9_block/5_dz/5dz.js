@@ -1,17 +1,33 @@
+function localStorageInit() {
+    let urlStorg = localStorage.getItem('urlStorg');
+    let formStorg = localStorage.getItem('formStorg');
+    let formStorg2 = localStorage.getItem('formStorg2');
+
+    if (urlStorg) {
+        const cardBlock = `
+        <div class="card">
+          <img
+            src="${urlStorg}"
+        
+            width="${formStorg}" height="${formStorg2}"
+          />
+         
+        </div>
+      `;
+
+        div.innerHTML = cardBlock;
+    }
+}
+
 
 function useRequest(url, callback) {
 
     fetch(url)
         .then((response) => {
-            //  console.log('url', url);
-            //  console.log('response', response, "end responce");
             const result = response.url;
-            //   console.log('result', result);
             return result;
         })
         .then((data) => {
-            // Объект результата в формате JSON
-            //    console.log("dat", data);
             if (callback) {
                 callback(data);
             }
@@ -20,13 +36,15 @@ function useRequest(url, callback) {
 };
 
 function displayResult(apiData) {
-    console.log("api", apiData);
+    localStorage.setItem('urlStorg', apiData);
+    localStorage.setItem('formStorg', form.value);
+    localStorage.setItem('formStorg2', form2.value);
     const cardBlock = `
         <div class="card">
           <img
             src="${apiData}"
         
-            width="${form}" height="${form2}"
+            width="${form.value}" height="${form2.value}"
           />
          
         </div>
@@ -67,9 +85,6 @@ function click1() {
 Откуда брать numImagesAvailable не написано (input по тз у нас только 2) и сколько фото грузить тоже не указано явно в задание. -"вывести список картинок на экран" 
 /*/
 
-
-
-
 let form = document.getElementById('val1');
 let form2 = document.getElementById('val2');
 let div = document.getElementById('apps');
@@ -77,3 +92,5 @@ const btnAsync = document.querySelector('.j-btn');
 
 
 btnAsync.addEventListener('click', click1);
+
+localStorageInit();
