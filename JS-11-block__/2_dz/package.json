@@ -1,0 +1,12 @@
+{
+  "name": "index",
+  "version": "1.0.0",
+  "description": "js",
+  "main": "index.js",
+  "devDependencies": {
+    "jest": "^29.3.1"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}
